@@ -85,7 +85,9 @@ function fmt(v, decimals = 0) {
 /* ---------- 引擎 ---------- */
 const E = { scenes: [], subs: [], built: false };
 
-function cueOf(sc, k, delay = 0) {
+function cueOf(sc, k, delay = 0, at) {
+  const a = at ? sc.anchors[`${k}|${at}`] : null;
+  if (a != null) return a + delay;
   const l = sc.lines[k];
   if (l) return l.start + delay;
   return (sc.lines.length ? sc.lines[sc.lines.length - 1].start : 0.6) + delay;
@@ -106,6 +108,7 @@ async function boot() {
     const sc = {
       def, idx: i, start: tm.start, end: tm.end, dur: tm.end - tm.start,
       lines: tm.lines.map((l) => ({ start: l.start - tm.start, dur: l.dur })),
+      anchors: tm.anchors || {},
       year: def.year, yearTo: def.yearTo || def.year,
     };
     sc.el = el("div", "scene" + (def.mood === "somber" ? " somber" : ""), root);

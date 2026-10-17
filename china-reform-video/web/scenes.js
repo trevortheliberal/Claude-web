@@ -124,7 +124,7 @@ SCENES.stats = (sc, root) => {
     const val = el("span", "", num);
     el("small", "", num, it.unit);
     const lab = el("div", "s-label", c, it.label);
-    return { it, c, rule, val, t0: cueOf(sc, it.cue, it.delay || 0) };
+    return { it, c, rule, val, t0: cueOf(sc, it.cue, it.delay || 0, it.at) };
   });
   return (t) => {
     head(t);
@@ -150,7 +150,7 @@ SCENES.event = (sc, root) => {
   const head = place(el("div", "abs e-head", root), 160, 520);
   const chars = splitChars(head, d.headline);
   const pillBox = place(el("div", "abs", root), 160, 712, { width: "1600px" });
-  const pills = (d.phrases || []).map((ph) => ({ e: el("span", "pill", pillBox, ph.text), t0: cueOf(sc, ph.cue, ph.delay || 0) }));
+  const pills = (d.phrases || []).map((ph) => ({ e: el("span", "pill", pillBox, ph.text), t0: cueOf(sc, ph.cue, ph.delay || 0, ph.at) }));
   const seal = d.seal ? makeSeal(root, d.seal) : null;
   const headEnd = 0.9 + chars.length * 0.07 + 0.6;
 
@@ -280,7 +280,7 @@ SCENES.fingerprints = (sc, root) => {
     const tx = el("div", "cmp-val", row);
     return { b, tx, v: v[1], w: (v[1] / 4.2) * 470 };
   });
-  const tPrint = cueOf(sc, 1, 1.0), tGrain = cueOf(sc, d.grain.cue, 0.3);
+  const tPrint = cueOf(sc, d.printCue, 0, d.printAt), tGrain = cueOf(sc, d.grain.cue, 0.3);
   return (t) => {
     fadeUp(paper, t, 0.1, 1.0, 30);
     paper.style.transform = `rotate(-2deg) translateY(${((1 - ease.out(prog(t, 0.1, 1.0))) * 30).toFixed(1)}px)`;
@@ -321,7 +321,7 @@ SCENES.map = (sc, root) => {
   sv("path", { d: M.nanhai, fill: "rgba(227,184,98,.5)", stroke: "rgba(227,184,98,.5)", "stroke-width": 0.6, "vector-effect": "non-scaling-stroke" }, svg);
 
   const groups = d.groups.map((g, gi) => {
-    const t0 = cueOf(sc, g.cue, 0.2);
+    const t0 = cueOf(sc, g.cue, 0.2, g.at);
     const gEl = sv("g", {}, svg);
     const pts = g.points.map((p, j) => {
       const [x, y] = proj(p.lon, p.lat);
@@ -404,7 +404,7 @@ SCENES.list = (sc, root) => {
     if (d.items.length > 4) { row.style.padding = "18px 0"; }
     el("div", "l-tag", row, it.tag).style.width = tagW + "px";
     el("div", "l-text", row, it.text);
-    return { row, t0: cueOf(sc, it.cue, it.delay || 0) };
+    return { row, t0: cueOf(sc, it.cue, it.delay || 0, it.at) };
   });
   return (t) => {
     head(t);
@@ -432,7 +432,7 @@ SCENES.quote = (sc, root) => {
   sec.textContent = "“" + d.secondary + "”";
   const foot = place(el("div", "abs", root), 0, 790, { width: W + "px", textAlign: "center" });
   const fp = el("span", "pill", foot, d.footer);
-  const tQ = cueOf(sc, d.quoteCue, d.quoteDelay || 0);
+  const tQ = cueOf(sc, d.quoteCue, 0, d.quoteAt);
   const tR = cueOf(sc, 0, 0.6);
   return (t) => {
     fadeUp(attr, t, 0.2, 0.8, 16);
@@ -462,7 +462,7 @@ SCENES.montage = (sc, root) => {
     if (big) { ti.style.fontSize = "80px"; tx.style.fontSize = "40px"; tag.style.fontSize = "54px"; }
     if (n === 4) { ti.style.fontSize = "46px"; card.style.padding = "34px 34px 30px"; }
     if (many) { ti.style.fontSize = "40px"; tag.style.fontSize = "32px"; tx.style.fontSize = "26px"; card.style.padding = "30px 24px"; }
-    return { card, rule, t0: cueOf(sc, c.cue, c.delay || 0) };
+    return { card, rule, t0: cueOf(sc, c.cue, c.delay || 0, c.at) };
   });
   return (t) => {
     head(t);
@@ -483,7 +483,7 @@ SCENES.dual = (sc, root) => {
     el("div", "d-date" + (o.tone === "somber" ? " somber" : ""), b, o.date);
     el("div", "d-text", b, o.text);
     if (o.sub) el("div", "d-sub", b, o.sub);
-    return { b, t0: cueOf(sc, o.cue, o.delay || 0) };
+    return { b, t0: cueOf(sc, o.cue, o.delay || 0, o.at) };
   };
   const L = side(d.left, 520), R = side(d.right, 1400);
   [L, R].forEach((s) => (s.b.querySelector(".d-date").style.fontSize = "128px"));
@@ -592,7 +592,7 @@ SCENES.compare = (sc, root) => {
     const b = place(el("div", "bar", root), BX, y + 44, { background: "linear-gradient(90deg,#a8261c,#e3b862)", width: "0px" });
     const at = place(el("div", "abs cmp-val", root, r.aText), BX, y - 8, { color: "var(--muted)", fontSize: "30px" });
     const bt = place(el("div", "abs cmp-val", root, r.bText), BX, y + 34, { color: "var(--gold)" });
-    return { r, lab, a, b, at, bt, wa: Math.max(4, (r.a / r.max) * BW), wb: (r.b / r.max) * BW, t0: cueOf(sc, r.cue, r.delay || 0) };
+    return { r, lab, a, b, at, bt, wa: Math.max(4, (r.a / r.max) * BW), wb: (r.b / r.max) * BW, t0: cueOf(sc, r.cue, r.delay || 0, r.at) };
   });
   return (t) => {
     head(t);
@@ -626,7 +626,7 @@ SCENES.poverty = (sc, root) => {
       fontFamily: "var(--serif)", fontWeight: 900, fontSize: p.value ? "68px" : "84px", color: p.value ? "var(--gold)" : "var(--red)" }, "");
     lbl.textContent = p.label;
     const yr = place(el("div", "abs m-tag", root, p.year), xs[i] - 200, base + 24, { width: "400px", textAlign: "center" });
-    return { b, lbl, yr, h: (p.value / vmax) * maxH, t0: cueOf(sc, p.cue, p.delay || 0), zero: !p.value };
+    return { b, lbl, yr, h: (p.value / vmax) * maxH, t0: cueOf(sc, p.cue, p.delay || 0, p.at), zero: !p.value };
   });
   return (t) => {
     head(t);
@@ -657,7 +657,7 @@ SCENES.ending = (sc, root) => {
     const e = el("div", "v-line", box, v.text);
     e.style.marginBottom = "44px";
     if (i === d.verses.length - 1) e.style.color = "var(--gold)";
-    return { e, t0: cueOf(sc, v.cue, v.delay || 0) };
+    return { e, t0: cueOf(sc, v.cue, v.delay || 0, v.at) };
   });
   const fin = place(el("div", "abs", root), 0, 330, { width: W + "px", display: "flex", flexDirection: "column", alignItems: "center" });
   const big = el("div", "t-big", fin, S.title);

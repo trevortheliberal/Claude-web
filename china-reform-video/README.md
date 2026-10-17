@@ -25,9 +25,9 @@
 bash tools/build.sh            # 加 --check 会用语音识别校对旁白有没有读错
 ```
 
-即可重新生成成片（4 核约 25 分钟）。常用改法：
+即可重新生成成片（4 核约 35 分钟）。常用改法：
 
-- **换旁白音色**：`script.json` → `voice.sid`（Kokoro v1.1-zh，3–57 为女声，58–102 为男声），`voice.speed` 调语速。
+- **换旁白音色**：`script.json` → `voice`。默认是 ZipVoice 零样本合成（`prompt` 指定音色参考录音，见 `tools/sherpa_tts.py` 的 `PROMPTS`；`speed` 调语速）；也可改回 Kokoro：`{"engine": "kokoro", "sid": 58, "speed": 1.0}`（3–57 女声，58–102 男声）。
 - **改某句旁白**：改对应场景的 `lines`；字幕和镜头时长会自动跟着旁白长度重新排。
 - **预览某一时刻**：`node tools/render.mjs stills 120 245.5`，图片输出到 `build/stills/`。
 - **浏览器里实时预览**：在项目根目录起一个静态服务（如 `npx serve .`），打开 `/web/index.html?play`。
@@ -37,7 +37,7 @@ bash tools/build.sh            # 加 --check 会用语音识别校对旁白有�
 | 环节 | 工具 |
 | --- | --- |
 | 画面 | `web/` 下的 HTML/CSS/JS，每帧都是时间的纯函数（`window.seek(t)`），用无头 Chromium 逐帧截图 → ffmpeg（H.264） |
-| 旁白 | [Kokoro v1.1-zh](https://huggingface.co/hexgrad/Kokoro-82M-v1.1-zh)（Apache-2.0）经 sherpa-onnx 离线合成；SenseVoice 识别回读做校对 |
+| 旁白 | [ZipVoice](https://github.com/k2-fsa/ZipVoice)（Emilia 数据集训练的零样本合成）经 sherpa-onnx 离线合成，音色参考 sherpa-onnx 自带的一段讲座测试录音；SenseVoice 识别回读做校对 |
 | 配乐 | `tools/music.py` 程序合成：铺底和声、低音、Karplus-Strong 拨弦（古筝感）、章节鼓点，随场景情绪变化，旁白出现时自动压低 |
 | 地图 | Apache ECharts 4.9.0 自带的中国地图（含南海诸岛，Apache-2.0），由 `tools/build_map.py` 转成 `data/china_map.json` |
 | 字体 | 思源宋体 / 思源黑体（Noto Serif SC / Noto Sans SC）、马善政楷书（Ma Shan Zheng），均为 SIL OFL，构建时从 Google Fonts 下载 |

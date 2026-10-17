@@ -2,7 +2,7 @@
   "title": "大潮",
   "subtitle": "中国改革开放简史",
   "years": "1978 — 2026",
-  "voice": { "model": "kokoro-multi-lang-v1_1", "sid": 58, "speed": 1.0 },
+  "voice": { "engine": "zipvoice", "prompt": "lecture", "speed": 0.88, "steps": 8 },
   "scenes": [
     {
       "id": "opening", "type": "title", "mood": "calm", "year": 1978,
@@ -17,9 +17,9 @@
       "heading": "1978年的中国",
       "items": [
         { "label": "国内生产总值", "value": 3679, "unit": "亿元", "cue": 1 },
-        { "label": "人均国内生产总值", "value": 385, "unit": "元", "cue": 1, "delay": 2.2 },
-        { "label": "城镇化率", "value": 17.92, "decimals": 2, "unit": "%", "cue": 2 },
-        { "label": "农村贫困人口（按现行标准）", "value": 7.7, "decimals": 1, "unit": "亿", "cue": 2, "delay": 3.0 }
+        { "label": "人均国内生产总值", "value": 385, "unit": "元", "cue": 1, "at": "人均" },
+        { "label": "城镇化率", "value": 17.92, "decimals": 2, "unit": "%", "cue": 2, "at": "八成以上" },
+        { "label": "农村贫困人口（按现行标准）", "value": 7.7, "decimals": 1, "unit": "亿", "cue": 2, "at": "农村贫困人口" }
       ],
       "lines": [
         "这是1978年的中国。",
@@ -36,9 +36,9 @@
       "id": "plenum", "type": "event", "mood": "rise", "year": 1978.9, "chapter": "第一章 · 破冰",
       "date": "1978.12", "kicker": "北京", "headline": "十一届三中全会",
       "phrases": [
-        { "text": "实践是检验真理的唯一标准", "cue": 0, "delay": 1.0 },
-        { "text": "解放思想　实事求是", "cue": 1, "delay": 1.0 },
-        { "text": "工作重心转向经济建设", "cue": 1, "delay": 3.5 }
+        { "text": "实践是检验真理的唯一标准", "cue": 0, "at": "实践是检验" },
+        { "text": "解放思想　实事求是", "cue": 1, "at": "十一届三中全会" },
+        { "text": "工作重心转向经济建设", "cue": 1, "at": "着重点转移" }
       ],
       "seal": "转折",
       "lines": [
@@ -49,7 +49,7 @@
     },
     {
       "id": "xiaogang", "type": "fingerprints", "mood": "rise", "year": 1978.95, "chapter": "第一章 · 破冰",
-      "place": "安徽凤阳 · 小岗村", "count": 18, "caption": "18户农民按下红手印",
+      "place": "安徽凤阳 · 小岗村", "count": 18, "caption": "18户农民按下红手印", "printCue": 1, "printAt": "按下红手印",
       "grain": { "label": "全国粮食产量", "unit": "亿吨", "from": [1978, 3.05], "to": [1984, 4.07], "cue": 3 },
       "lines": [
         "改革首先从农村破题。",
@@ -62,7 +62,7 @@
       "id": "sinous", "type": "event", "mood": "rise", "year": 1979, "chapter": "第一章 · 破冰",
       "date": "1979.1.1", "kicker": "外交", "headline": "中美正式建交",
       "phrases": [
-        { "text": "邓小平访问美国", "cue": 0, "delay": 3.0 },
+        { "text": "邓小平访问美国", "cue": 0, "at": "邓小平访问美国" },
         { "text": "打开国门", "cue": 1 }
       ],
       "arc": ["北京", "华盛顿"],
@@ -120,10 +120,10 @@
       "date": "1984", "kicker": "城市改革", "headline": "有计划的商品经济",
       "phrases": [
         { "text": "个体户", "cue": 2 },
-        { "text": "乡镇企业", "cue": 2, "delay": 0.6 },
-        { "text": "联想", "cue": 2, "delay": 3.2 },
-        { "text": "海尔", "cue": 2, "delay": 3.6 },
-        { "text": "万科", "cue": 2, "delay": 4.0 }
+        { "text": "乡镇企业", "cue": 2, "at": "乡镇企业" },
+        { "text": "联想", "cue": 2, "at": "联想" },
+        { "text": "海尔", "cue": 2, "at": "海尔" },
+        { "text": "万科", "cue": 2, "at": "万科" }
       ],
       "seal": "搞活",
       "lines": [
@@ -153,7 +153,7 @@
     },
     {
       "id": "south", "type": "quote", "mood": "rise", "year": 1992.1, "chapter": "第二章 · 市场",
-      "quote": "发展才是硬道理", "quoteCue": 1, "quoteDelay": 3.6,
+      "quote": "发展才是硬道理", "quoteCue": 1, "quoteAt": "发展才是硬道理",
       "secondary": "计划经济不等于社会主义，资本主义也有计划；市场经济不等于资本主义，社会主义也有市场。",
       "secondaryCue": 1,
       "attribution": "邓小平南方谈话 · 1992",
@@ -170,7 +170,7 @@
       "heading": "向市场经济转轨",
       "cards": [
         { "tag": "1990", "title": "浦东开发开放", "text": "从农田和滩涂上崛起", "cue": 0 },
-        { "tag": "1990", "title": "沪深证交所", "text": "资本市场起步", "cue": 0, "delay": 3.0 },
+        { "tag": "1990", "title": "沪深证交所", "text": "资本市场起步", "cue": 0, "at": "上海、深圳两家" },
         { "tag": "1992", "title": "“下海”潮", "text": "放弃“铁饭碗”", "cue": 1 },
         { "tag": "1994", "title": "分税制改革", "text": "汇率并轨，搭起市场经济框架", "cue": 2 }
       ],
@@ -185,7 +185,7 @@
       "date": "1998", "kicker": "1990年代后期", "headline": "阵痛",
       "phrases": [
         { "text": "国有企业改革", "cue": 1 },
-        { "text": "上千万职工下岗", "cue": 1, "delay": 2.5 },
+        { "text": "上千万职工下岗", "cue": 1, "at": "上千万职工下岗" },
         { "text": "福利分房终结　住房商品化", "cue": 2 }
       ],
       "lines": [
@@ -198,7 +198,7 @@
       "id": "handover", "type": "dual", "mood": "rise", "year": 1997.5, "yearTo": 1999.9, "chapter": "第二章 · 市场",
       "preface": "1997年2月19日　邓小平逝世", "prefaceCue": 0,
       "left": { "date": "1997.7.1", "text": "香港回归", "cue": 1 },
-      "right": { "date": "1999.12.20", "text": "澳门回归", "cue": 1, "delay": 2.6 },
+      "right": { "date": "1999.12.20", "text": "澳门回归", "cue": 1, "at": "1999年" },
       "footer": "“一国两制”从构想变为现实", "footerCue": 2,
       "lines": [
         "1997年2月，邓小平逝世。",
@@ -210,7 +210,7 @@
       "id": "wto", "type": "event", "mood": "bright", "year": 2001.9, "chapter": "第二章 · 市场",
       "date": "2001.12.11", "kicker": "第143个成员", "headline": "加入世界贸易组织",
       "phrases": [
-        { "text": "历时15年谈判", "cue": 0, "delay": 2.5 },
+        { "text": "历时15年谈判", "cue": 0, "at": "经过长达15年" },
         { "text": "北京申奥成功", "cue": 1 }
       ],
       "seal": "入世",
@@ -228,7 +228,7 @@
       "heading": "世界工厂",
       "items": [
         { "label": "货物出口额（2001→2011）", "value": 7, "unit": "倍", "cue": 1 },
-        { "label": "成为世界第一大货物出口国", "value": 2009, "unit": "年", "plain": true, "cue": 1, "delay": 3.2 },
+        { "label": "成为世界第一大货物出口国", "value": 2009, "unit": "年", "plain": true, "cue": 1, "at": "2009年起" },
         { "label": "全国农民工总量（2011）", "value": 2.53, "decimals": 2, "unit": "亿人", "cue": 2 }
       ],
       "lines": [
@@ -266,7 +266,7 @@
       "id": "second", "type": "event", "mood": "bright", "year": 2010.5, "chapter": "第三章 · 融入",
       "date": "2010", "kicker": "国内生产总值超过日本", "headline": "世界第二大经济体",
       "phrases": [
-        { "text": "上海世博会　7308万人次", "cue": 0, "delay": 5.0 },
+        { "text": "上海世博会　7308万人次", "cue": 0, "at": "上海世博会" },
         { "text": "2011　城镇人口首超农村", "cue": 1 }
       ],
       "seal": "第二",
@@ -283,9 +283,9 @@
       "id": "deepen", "type": "event", "mood": "rise", "year": 2013, "chapter": "第四章 · 新时代",
       "date": "2013", "kicker": "十八届三中全会", "headline": "全面深化改革",
       "phrases": [
-        { "text": "市场在资源配置中起决定性作用", "cue": 1, "delay": 2.0 },
+        { "text": "市场在资源配置中起决定性作用", "cue": 1, "at": "使市场" },
         { "text": "“一带一路”倡议", "cue": 2 },
-        { "text": "上海自由贸易试验区", "cue": 2, "delay": 2.0 }
+        { "text": "上海自由贸易试验区", "cue": 2, "at": "上海自由贸易" }
       ],
       "seal": "深改",
       "lines": [
@@ -299,8 +299,8 @@
       "heading": "农村贫困人口（现行标准）",
       "points": [
         { "year": 1978, "value": 77039, "label": "7.7亿", "cue": 0 },
-        { "year": 2012, "value": 9899, "label": "9899万", "cue": 0, "delay": 1.0 },
-        { "year": 2020, "value": 0, "label": "全部脱贫", "cue": 1, "delay": 2.0 }
+        { "year": 2012, "value": 9899, "label": "9899万", "cue": 0, "at": "9899万" },
+        { "year": 2020, "value": 0, "label": "全部脱贫", "cue": 1, "at": "全部脱贫" }
       ],
       "note": "世界银行：四十年间中国近8亿人摆脱极端贫困，约占同期全球减贫人数的四分之三", "noteCue": 2,
       "lines": [
@@ -313,10 +313,10 @@
       "id": "tech", "type": "montage", "mood": "bright", "year": 2021, "chapter": "第四章 · 新时代",
       "heading": "速度与远方",
       "cards": [
-        { "tag": "2008 → 2025", "title": "高铁 5万公里", "text": "超过其他国家总和", "cue": 0, "delay": 2.0 },
-        { "tag": "2019", "title": "嫦娥四号", "text": "首次着陆月球背面", "cue": 1, "delay": 3.2 },
-        { "tag": "2021", "title": "天问一号", "text": "着陆火星", "cue": 1, "delay": 5.4 },
-        { "tag": "2022", "title": "中国空间站", "text": "全面建成", "cue": 1, "delay": 7.0 },
+        { "tag": "2008 → 2025", "title": "高铁 5万公里", "text": "超过其他国家总和", "cue": 0, "at": "高铁营业里程" },
+        { "tag": "2019", "title": "嫦娥四号", "text": "首次着陆月球背面", "cue": 1, "at": "嫦娥四号" },
+        { "tag": "2021", "title": "天问一号", "text": "着陆火星", "cue": 1, "at": "天问一号" },
+        { "tag": "2022", "title": "中国空间站", "text": "全面建成", "cue": 1, "at": "中国空间站" },
         { "tag": "2025", "title": "新能源汽车", "text": "年产1652万辆", "cue": 2 }
       ],
       "lines": [
@@ -341,8 +341,8 @@
       "heading": "课题",
       "items": [
         { "tag": "环境", "text": "污染治理与绿色转型", "cue": 1 },
-        { "tag": "差距", "text": "城乡与地区发展不平衡", "cue": 1, "delay": 1.6 },
-        { "tag": "风险", "text": "房地产调整与地方政府债务", "cue": 1, "delay": 3.4 },
+        { "tag": "差距", "text": "城乡与地区发展不平衡", "cue": 1, "at": "城乡和地区差距" },
+        { "tag": "风险", "text": "房地产调整与地方政府债务", "cue": 1, "at": "房地产市场调整" },
         { "tag": "人口", "text": "2022年起人口减少，老龄化加深", "cue": 2 },
         { "tag": "外部", "text": "贸易摩擦与科技竞争加剧", "cue": 3 }
       ],
@@ -357,9 +357,9 @@
       "id": "now", "type": "event", "mood": "rise", "year": 2026.2, "chapter": "第四章 · 新时代",
       "date": "2026", "kicker": "2024 — 2026", "headline": "进一步全面深化改革",
       "phrases": [
-        { "text": "2024.7　二十届三中全会", "cue": 0, "delay": 0.8 },
+        { "text": "2024.7　二十届三中全会", "cue": 0, "at": "二十届三中全会" },
         { "text": "2026.3　“十五五”规划纲要获批", "cue": 1 },
-        { "text": "2028　改革开放五十周年", "cue": 1, "delay": 5.2 }
+        { "text": "2028　改革开放五十周年", "cue": 1, "at": "距离改革开放五十周年" }
       ],
       "seal": "十五五",
       "lines": [
@@ -394,9 +394,9 @@
       "heading": "1978　→　2025",
       "rows": [
         { "label": "城镇化率", "a": 17.92, "aText": "17.9%", "b": 67.89, "bText": "67.9%", "max": 100, "cue": 0 },
-        { "label": "城镇常住人口", "a": 1.72, "aText": "1.7亿", "b": 9.54, "bText": "9.5亿", "max": 10, "cue": 0, "delay": 3.0 },
+        { "label": "城镇常住人口", "a": 1.72, "aText": "1.7亿", "b": 9.54, "bText": "9.5亿", "max": 10, "cue": 0, "at": "超过9.5亿人" },
         { "label": "货物进出口总额", "a": 0.0355, "aText": "355亿元", "b": 45.47, "bText": "45.5万亿元", "max": 50, "cue": 1 },
-        { "label": "人均预期寿命", "a": 67.8, "aText": "67.8岁（1981）", "b": 79.25, "bText": "79.25岁", "max": 90, "cue": 1, "delay": 4.0 }
+        { "label": "人均预期寿命", "a": 67.8, "aText": "67.8岁（1981）", "b": 79.25, "bText": "79.25岁", "max": 90, "cue": 1, "at": "人均预期寿命" }
       ],
       "lines": [
         "城镇化率从17.9%提高到67.9%，超过9.5亿人生活在城镇。",
@@ -408,7 +408,7 @@
       "tail": 5.2,
       "verses": [
         { "text": "从小岗村的红手印，到深圳的塔吊", "cue": 0 },
-        { "text": "从“下海”的勇气，到飞向太空的飞船", "cue": 0, "delay": 3.6 },
+        { "text": "从“下海”的勇气，到飞向太空的飞船", "cue": 0, "at": "从“下海”" },
         { "text": "亿万普通人用双手改写命运", "cue": 1 },
         { "text": "摸着石头过河——这条路，仍在继续", "cue": 2 }
       ],
@@ -423,7 +423,7 @@
       "sources": [
         "数据来源：国家统计局历年统计公报及《改革开放40年经济社会发展成就系列报告》、交通运输部、国家卫生健康委员会、世界银行",
         "地图：Apache ECharts 中国地图（含南海诸岛）",
-        "旁白：Kokoro v1.1-zh 语音合成（sherpa-onnx）　音乐：程序合成",
+        "旁白：ZipVoice 语音合成（sherpa-onnx）　音乐：程序合成",
         "国内生产总值为现价；部分历史年份数据经统计部门修订，可能与早期公布数略有出入"
       ]
     }
