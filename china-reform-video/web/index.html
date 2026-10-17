@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>大潮 · 中国改革开放简史</title>
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <div id="bg"><div class="glow"></div><div class="floor"></div></div>
+  <div id="scenes"></div>
+  <div id="hud">
+    <div id="chapterTag"><span class="tag-bar"></span><span class="txt"></span></div>
+    <svg id="timeline" width="1920" height="1080"></svg>
+  </div>
+  <div id="subs"><span></span></div>
+  <div id="vignette"></div>
+  <div id="grain"></div>
+  <div id="fade"></div>
+</div>
+<script src="engine.js"></script>
+<script src="scenes.js"></script>
+<script>boot().catch((e) => { window.__error = String(e && e.stack || e); console.error(e); });</script>
+</body>
+</html>
